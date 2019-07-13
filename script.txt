@@ -1,0 +1,55 @@
+create database db_colegio;
+
+use db_colegio;
+
+
+create table tb_producto(
+cod_pro int,
+nom_pro varchar(90),
+des_pro varchar(120),
+pre_pro decimal(10,2)
+);
+
+create table tb_vendedor(
+cod_ven int,
+nom_ven varchar(90),
+ape_ven varchar(120),
+dni_ven int
+);
+
+create table tb_cliente(
+cod_cli int,
+nom_cli varchar(90),
+ape_cli varchar(120),
+dni_cli int
+);
+
+
+create table tb_documento_de_compra(
+cod_doc int,
+fec_doc date default now(),
+cod_ven int,
+cod_cli int,
+tot_doc decimal(10,2)
+);
+
+create table tb_detalle_documento_de_compra(
+cod_det int,
+cod_doc int,
+cod_pro int,
+can_det int,
+sub_det decimal(10,2)
+);
+
+SET GLOBAL time_zone = '-300';
+
+
+delimiter @@
+create procedure fn_listar_producto()
+begin
+ select  from tb_producto;
+end @@
+delimiter ;
+insert into tb_producto values(1,'Chocolate','Chocolate',12.0);
+insert into tb_producto values(2,'Piqueos','Piqueos',12.0);
+call fn_listar_producto();
